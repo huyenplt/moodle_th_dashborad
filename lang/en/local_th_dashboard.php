@@ -24,6 +24,7 @@
  */
 
 // Plugin Name.
+$string['th_dashboard:viewthdashboard'] = 'Add TH dashboard to navigation block';
 $string['pluginname'] = 'Custom Navigation';
 $string['THname'] = 'TH Dashboard';
 $string['thkey'] = 'thdashboard';

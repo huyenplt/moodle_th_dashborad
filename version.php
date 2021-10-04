@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2018051601;
+$plugin->version   = 2018051603;
 $plugin->requires  = 2016120500;
 $plugin->component = 'local_th_dashboard';
 $plugin->maturity = MATURITY_STABLE;

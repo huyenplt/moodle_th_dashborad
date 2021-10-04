@@ -32,21 +32,23 @@ defined('MOODLE_INTERNAL') || die();
  * @return void
  */
 function local_th_dashboard_extend_navigation(global_navigation $navigation) {
+    $systemcontext = context_system::instance();
     $settings = get_config('local_th_dashboard');
-    $th_url = new moodle_url('/local/th_dashboard/view.php', array('key' => 'thdashboard'));
-    $main_node = $navigation->add(get_string('THname', 'local_th_dashboard'),$th_url, navigation_node::TYPE_CONTAINER, null, 'thdashboard');
-    $main_node->nodetype = 1;
-    // $main_node->forceopen = true;
-    // $main_node->showinflatnavigation = true;
+    if (has_capability('local/th_dashboard:viewthdashboard', $systemcontext)) {
+        $th_url = new moodle_url('/local/th_dashboard/view.php', array('key' => 'thdashboard'));
+        $main_node = $navigation->add(get_string('THname', 'local_th_dashboard'),$th_url, navigation_node::TYPE_CONTAINER, null, 'thdashboard');
+        $main_node->nodetype = 1;
+        // $main_node->forceopen = true;
+        // $main_node->showinflatnavigation = true;
 
-    // $sub_node = $main_node->add(get_string('pluinname', 'local_th_dashboard'),'/local/th_dashboard/');
-
-    if (!empty($settings->menuitems) && $settings->enabled) {
-        $menu = new custom_menu($settings->menuitems, current_language());
-        $count = 0;
-        if ($menu->has_children()) {
-            foreach ($menu->get_children() as $item) {
-                navigation_custom_menu_item($item, 1, $main_node, $settings->flatenabled, $count);
+        // $sub_node = $main_node->add(get_string('pluinname', 'local_th_dashboard'),'/local/th_dashboard/');
+        if (!empty($settings->menuitems) && $settings->enabled) {
+            $menu = new custom_menu($settings->menuitems, current_language());
+            $count = 0;
+            if ($menu->has_children()) {
+                foreach ($menu->get_children() as $item) {
+                    navigation_custom_menu_item($item, 1, $main_node, $settings->flatenabled, $count);
+                }
             }
         }
     }
